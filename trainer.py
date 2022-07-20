@@ -267,29 +267,20 @@ class Tester():
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
 
                     np_image = np_images[i]
-					
 					cv2.imwrite('./np_arr/'+str(i)+'.png',np_image)
-					
-                    np_image = torch.moveaxis(np_image, -1, 0)
-                    
-                    # Save prediction map
-                    if self.args.save_map is not None:
-            
-                      os.makedirs("./seg_img/",exist_ok=True)
-                    
-                      thresh = torch.tensor(200.0, device = self.device, dtype = torch.float32)
-                      white = torch.tensor(254.0, device = self.device, dtype = torch.float32)
-
-                      output = output.squeeze()*255.0  # convert uint8 type
-
-                      
-                      output.unsqueeze_(0)
-                      output = output.repeat(3, 1, 1)
-                      
-                      output = torch.where(output < thresh, white, np_image)
-                      output = torch.moveaxis(output, 0, -1)
-                      output = (output.detach().cpu().numpy()).astype(np.uint8)
-                      cv2.imwrite("./seg_img/" + image_name[i]+'.png', output)
+					np_image = torch.moveaxis(np_image, -1, 0)
+					# Save prediction map
+					if self.args.save_map is not None:
+	
+						os.makedirs("./seg_img/",exist_ok=True)
+						thresh = torch.tensor(200.0, device = self.device, dtype = torch.float32)
+						white = torch.tensor(254.0, device = self.device, dtype = torch.float32)
+						output = output.squeeze()*255.0  # convert uint8 type
+						output.unsqueeze_(0)
+						output = output.repeat(3, 1, 1)
+						output = torch.moveaxis(output, 0, -1)
+						output = (output.detach().cpu().numpy()).astype(np.uint8)
+						cv2.imwrite("./seg_img/" + image_name[i]+'.png', output)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
