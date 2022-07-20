@@ -261,12 +261,10 @@ class Tester():
                 H, W = original_size
 
                 for i in range(images.size(0)):
-
                     h, w = H[i].item(), W[i].item()
-
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
 					
-					np_image = np_images[i]
+				    np_image = np_images[i]
 					
 					cv2.imwrite('./np_arr/'+str(i)+'.png',np_image)
 				
