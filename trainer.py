@@ -301,7 +301,6 @@ class Tester():
             test_avgf = test_avgf.avg
             test_s_m = test_s_m.avg
 
-         print(f'Test Loss:{test_loss:.4f} | MAX_F:{test_maxf:.4f} | MAE:{test_mae:.4f} '
-               f'| S_Measure:{test_s_m:.4f}, time: {time.time() - t:.3f}s')
+         print(f'Test Loss:{test_loss:.4f} | MAX_F:{test_maxf:.4f} | MAE:{test_mae:.4f}'f'| S_Measure:{test_s_m:.4f}, time: {time.time() - t:.3f}s')
 
          return test_loss, test_mae, test_maxf, test_avgf, test_s_m
