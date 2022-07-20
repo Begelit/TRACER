@@ -264,7 +264,9 @@ class Tester():
                     h, w = H[i].item(), W[i].item()
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
                     np_image = np_images[i]
-                    cv2.imwrite('./np_arr/'+str(i)+'.png',np_image)
+                    print(type(np_image))
+                    print(np_image)
+                    #cv2.imwrite('./np_arr/'+str(i)+'.png',np_image)
                     np_image = torch.moveaxis(np_image, -1, 0)
                     # Save prediction map
                     if self.args.save_map is not None:
