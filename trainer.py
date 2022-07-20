@@ -267,6 +267,9 @@ class Tester():
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
 
                     np_image = np_images[i]
+					
+					cv2.imwrite('./np_arr/'+str(i)+'.png',np_image)
+					
                     np_image = torch.moveaxis(np_image, -1, 0)
                     
                     # Save prediction map
@@ -289,18 +292,18 @@ class Tester():
                       cv2.imwrite("./seg_img/" + image_name[i]+'.png', output)
 
                     # log
-                    test_loss.update(loss.item(), n=1)
-                    test_mae.update(mae, n=1)
-                    test_maxf.update(max_f, n=1)
-                    test_avgf.update(avg_f, n=1)
-                    test_s_m.update(s_score, n=1)
+                    #test_loss.update(loss.item(), n=1)
+                    #test_mae.update(mae, n=1)
+                    #test_maxf.update(max_f, n=1)
+                    #test_avgf.update(avg_f, n=1)
+                    #test_s_m.update(s_score, n=1)
 
-            test_loss = test_loss.avg
-            test_mae = test_mae.avg
-            test_maxf = test_maxf.avg
-            test_avgf = test_avgf.avg
-            test_s_m = test_s_m.avg
+            #test_loss = test_loss.avg
+            #test_mae = test_mae.avg
+            #test_maxf = test_maxf.avg
+            #test_avgf = test_avgf.avg
+            #test_s_m = test_s_m.avg
 
-        print(f'Test Loss:{test_loss:.4f} | MAX_F:{test_maxf:.4f} | MAE:{test_mae:.4f}'f'| S_Measure:{test_s_m:.4f}, time: {time.time() - t:.3f}s')
+        #print(f'Test Loss:{test_loss:.4f} | MAX_F:{test_maxf:.4f} | MAE:{test_mae:.4f}'f'| S_Measure:{test_s_m:.4f}, time: {time.time() - t:.3f}s')
 
-        return test_loss, test_mae, test_maxf, test_avgf, test_s_m
+        #return test_loss, test_mae, test_maxf, test_avgf, test_s_m
