@@ -62,7 +62,7 @@ class Test_DatasetGenerate(Dataset):
     def __getitem__(self, idx):
         image_name = Path(self.images[idx]).stem
         image = cv2.imread(self.images[idx])
-        np_image = cv2.imread(self.images[idx])
+        #np_image = cv2.imread(self.images[idx])
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         original_size = image.shape[:2]
 
@@ -70,7 +70,8 @@ class Test_DatasetGenerate(Dataset):
             augmented = self.transform(image=image)
             image = augmented['image']
 
-        return np_image, image, original_size, image_name
+        #return np_image, image, original_size, image_name
+        return image, original_size, image_name
 
     def __len__(self):
         return len(self.images)

@@ -249,33 +249,48 @@ class Tester():
         test_s_m = AvgMeter()
         t = time.time()
 
-#         Eval_tool = Evaluation_metrics(self.args.dataset, self.device)
+	#Eval_tool = Evaluation_metrics(self.args.dataset, self.device)
 
         with torch.no_grad():
-            for i, (np_images, images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
+            #for i, (np_images, images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
+            for i, (images, masks, original_size, image_name) in enumerate(tqdm(self.test_loader)):
+            
                 images = torch.tensor(images, device=self.device, dtype=torch.float32)
 
-                np_images = torch.tensor(np_images, device = self.device, dtype=torch.float32)
+                #np_images = torch.tensor(np_images, device = self.device, dtype=torch.float32)
 
                 outputs, edge_mask, ds_map = self.model(images)
                 H, W = original_size
 
                 for i in range(images.size(0)):
+                
+                    mask = gt_to_tensor(masks[i])
                     h, w = H[i].item(), W[i].item()
+                    
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
-                    np_image = np_images[i]
-                    print(type(np_image))
-                    print(np_image)
+                    loss = self.criterion(output, mask)
+                    
+                    #mae, max_f, avg_f, s_score = Eval_tool.cal_total_metrics(output, mask)
+                    
+                    #np_image = np_images[i]
+                    #print(type(np_image))
+                    #print(np_image)
                     #cv2.imwrite('./np_arr/'+str(i)+'.png',np_image)
-                    np_image = torch.moveaxis(np_image, -1, 0)
+                    #np_image = torch.moveaxis(np_image, -1, 0)
+                    
                     # Save prediction map
                     if self.args.save_map is not None:
+                    
                     	os.makedirs("./seg_img/",exist_ok=True)
-                    	output = output.squeeze()*255.0  # convert uint8 type
-                    	output.unsqueeze_(0)
-                    	output = output.repeat(3, 1, 1)
-                    	output = torch.moveaxis(output, 0, -1)
-                    	output = (output.detach().cpu().numpy()).astype(np.uint8)
+                    	
+                    	#output = output.squeeze()*255.0  # convert uint8 type
+                    	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
+
+                    	#output.unsqueeze_(0)
+                    	#output = output.repeat(3, 1, 1)
+                    	#output = torch.moveaxis(output, 0, -1)
+                    	#output = (output.detach().cpu().numpy()).astype(np.uint8)
+                    	
                     	cv2.imwrite("./seg_img/" + image_name[i]+'.png', output)
 
                     # log
