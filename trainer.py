@@ -253,7 +253,8 @@ class Tester():
 
         with torch.no_grad():
             #for i, (np_images, images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
-            for i, (images, masks, original_size, image_name) in enumerate(tqdm(self.test_loader)):
+            #for i, (images, masks, original_size, image_name) in enumerate(tqdm(self.test_loader)):
+            for i, (images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
             
                 images = torch.tensor(images, device=self.device, dtype=torch.float32)
 
@@ -264,11 +265,11 @@ class Tester():
 
                 for i in range(images.size(0)):
                 
-                    mask = gt_to_tensor(masks[i])
+                    #mask = gt_to_tensor(masks[i])
                     h, w = H[i].item(), W[i].item()
                     
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
-                    loss = self.criterion(output, mask)
+                    #loss = self.criterion(output, mask)
                     
                     #mae, max_f, avg_f, s_score = Eval_tool.cal_total_metrics(output, mask)
                     
