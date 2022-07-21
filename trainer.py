@@ -231,8 +231,11 @@ class Tester():
 
         self.criterion = Criterion(args)
 
-        te_img_folder = args.data_path
-        te_gt_folder = None
+        #te_img_folder = args.data_path
+        #te_gt_folder = None
+        te_img_folder = os.path.join(args.data_path, 'Test/images/')
+        te_gt_folder = os.path.join(args.data_path, 'Test/masks/')
+        
         self.test_loader = get_loader(te_img_folder, te_gt_folder, edge_folder=None, phase='test',
                                       batch_size=args.batch_size, shuffle=False,
                                       num_workers=args.num_workers, transform=self.test_transform)

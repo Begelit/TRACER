@@ -10,9 +10,10 @@ from sklearn.model_selection import train_test_split
 
 
 class DatasetGenerate(Dataset):
-    def __init__(self, img_folder, gt_folder, edge_folder, phase: str = 'train', transform=None, seed=None):
+    def __init__(self, img_folder, gt_folder = None, edge_folder, phase: str = 'train', transform=None, seed=None):
         self.images = sorted(glob.glob(img_folder + '/*'))
-        self.gts = sorted(glob.glob(gt_folder + '/*'))
+        #self.gts = sorted(glob.glob(gt_folder + '/*'))
+        self.gts = sorted(glob.glob(gt_folder + '/*')) if gt_folder is not None else None
         self.edges = sorted(glob.glob(edge_folder + '/*'))
         self.transform = transform
 
@@ -71,7 +72,11 @@ class Test_DatasetGenerate(Dataset):
             image = augmented['image']
 
         #return np_image, image, original_size, image_name
-        return image, original_size, image_name
+        #return image, original_size, image_name
+        if self.gts is not None:
+            return image, self.gts[idx], original_size, image_name
+        else:
+            return image, original_size, image_name
 
     def __len__(self):
         return len(self.images)
