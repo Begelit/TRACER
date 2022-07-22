@@ -55,8 +55,9 @@ class DatasetGenerate(Dataset):
 
 
 class Test_DatasetGenerate(Dataset):
-    def __init__(self, img_folder, gt_folder, transform=None):
+    def __init__(self, img_folder, gt_folder = None, transform=None):
         self.images = sorted(glob.glob(img_folder + '/*'))
+        self.gts = sorted(glob.glob(gt_folder + '/*')) if gt_folder is not None else None
 #         self.gts = None #sorted(glob.glob(gt_folder + '/*'))
         self.transform = transform
 
