@@ -10,10 +10,10 @@ from sklearn.model_selection import train_test_split
 
 
 class DatasetGenerate(Dataset):
-    def __init__(self, img_folder, gt_folder = None, edge_folder, phase: str = 'train', transform=None, seed=None):
+    def __init__(self, img_folder, gt_folder, edge_folder, phase: str = 'train', transform=None, seed=None):
         self.images = sorted(glob.glob(img_folder + '/*'))
-        #self.gts = sorted(glob.glob(gt_folder + '/*'))
-        self.gts = sorted(glob.glob(gt_folder + '/*')) if gt_folder is not None else None
+        self.gts = sorted(glob.glob(gt_folder + '/*'))
+        #self.gts = sorted(glob.glob(gt_folder + '/*')) if gt_folder is not None else None
         self.edges = sorted(glob.glob(edge_folder + '/*'))
         self.transform = transform
 
