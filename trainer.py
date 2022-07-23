@@ -268,13 +268,15 @@ class Tester():
 
                 for i in range(images.size(0)):
                 
-                    #mask = gt_to_tensor(masks[i])
+                    mask = gt_to_tensor(masks[i])
+                    
                     h, w = H[i].item(), W[i].item()
                     
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
-                    #loss = self.criterion(output, mask)
                     
-                    #mae, max_f, avg_f, s_score = Eval_tool.cal_total_metrics(output, mask)
+                    loss = self.criterion(output, mask)
+                    
+                    mae, max_f, avg_f, s_score = Eval_tool.cal_total_metrics(output, mask)
                     
                     #np_image = np_images[i]
                     #print(type(np_image))
@@ -298,18 +300,19 @@ class Tester():
                     	cv2.imwrite("./seg_img/" + image_name[i]+'.png', output)
 
                     # log
-                    #test_loss.update(loss.item(), n=1)
-                    #test_mae.update(mae, n=1)
-                    #test_maxf.update(max_f, n=1)
-                    #test_avgf.update(avg_f, n=1)
-                    #test_s_m.update(s_score, n=1)
+                    test_loss.update(loss.item(), n=1)
+                    test_mae.update(mae, n=1)
+                    test_maxf.update(max_f, n=1)
+                    test_avgf.update(avg_f, n=1)
+                    test_s_m.update(s_score, n=1)
 
-            #test_loss = test_loss.avg
-            #test_mae = test_mae.avg
-            #test_maxf = test_maxf.avg
-            #test_avgf = test_avgf.avg
-            #test_s_m = test_s_m.avg
+            test_loss = test_loss.avg
+            test_mae = test_mae.avg
+            test_maxf = test_maxf.avg
+            test_avgf = test_avgf.avg
+            test_s_m = test_s_m.avg
 
-        #print(f'Test Loss:{test_loss:.4f} | MAX_F:{test_maxf:.4f} | MAE:{test_mae:.4f}'f'| S_Measure:{test_s_m:.4f}, time: {time.time() - t:.3f}s')
+        print(f'Test Loss:{test_loss:.4f} | MAX_F:{test_maxf:.4f} | MAE:{test_mae:.4f} '
+              f'| S_Measure:{test_s_m:.4f}, time: {time.time() - t:.3f}s')
 
-        #return test_loss, test_mae, test_maxf, test_avgf, test_s_m
+        return test_loss, test_mae, test_maxf, test_avgf, test_s_m
