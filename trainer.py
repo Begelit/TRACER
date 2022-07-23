@@ -252,7 +252,7 @@ class Tester():
         test_s_m = AvgMeter()
         t = time.time()
 
-	#Eval_tool = Evaluation_metrics(self.args.dataset, self.device)
+	Eval_tool = Evaluation_metrics(self.args.dataset, self.device)
 
         with torch.no_grad():
             #for i, (np_images, images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
