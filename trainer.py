@@ -289,15 +289,16 @@ class Tester():
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	imgs = (imgs.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	#removed_bg_imgs = np.where()
-                    	print(imgs.shape)
-                    	print(output.shape)
+                    	removed_bg_imgs = np.where(output.reshape((h,w,1))>0,imgs,255)
+                    	#print(imgs.shape)
+                    	#print(output.shape)
                     	#output.unsqueeze_(0)
                     	#output = output.repeat(3, 1, 1)
                     	#output = torch.moveaxis(output, 0, -1)
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
                     	cv2.imwrite("./results/masks" + image_name[i]+'.png', output)
+                    	cv2.imwrite("./results/removed_background" + image_name[i]+'.png', removed_bg_imgs)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
