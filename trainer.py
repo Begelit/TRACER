@@ -258,11 +258,12 @@ class Tester():
             #for i, (images, masks, original_size, image_name) in enumerate(tqdm(self.test_loader)):
             for i, (images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
             
-                images = torch.tensor(images, device=self.device, dtype=torch.float32)
+            	tens_images = torch.tensor(images, device=self.device, dtype=torch.float32)
+            	print(type(images(i)))
 
                 #np_images = torch.tensor(np_images, device = self.device, dtype=torch.float32)
 
-                outputs, edge_mask, ds_map = self.model(images)
+                outputs, edge_mask, ds_map = self.model(tens_images)
                 H, W = original_size
 
                 for i in range(images.size(0)):
@@ -271,8 +272,8 @@ class Tester():
                     h, w = H[i].item(), W[i].item()
                     
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
-                    print('*****',images[i].shape,'*****')
-                    img = F.interpolate(images[i].unsqueeze(0), size=(h, w))
+                    #print('*****',images[i].shape,'*****')
+                    #img = F.interpolate(images[i].unsqueeze(0), size=(h, w))
                     #loss = self.criterion(output, mask)
                     
                     #mae, max_f, avg_f, s_score = Eval_tool.cal_total_metrics(output, mask)
@@ -292,16 +293,16 @@ class Tester():
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	#img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	print(type(img))
-                    	print(img.shape)
-                    	print(img)
+                    	#img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
+                    	#print(type(img))
+                    	#print(img.shape)
+                    	#print(img)
                     	#%matplotlib inline
-                    	new_img = np.zeros((h,w,3),dtype = np.uint8)
-                    	new_img[:,:,0] = img[0]
-                    	new_img[:,:,1] = img[2]
-                    	new_img[:,:,2] = img[1]
-                    	plt.imshow(array_to_img(new_img))
+                    	#new_img = np.zeros((h,w,3),dtype = np.uint8)
+                    	#new_img[:,:,0] = img[0]
+                    	#new_img[:,:,1] = img[2]
+                    	#new_img[:,:,2] = img[1]
+                    	#plt.imshow(array_to_img(new_img))
                     	#print(new_img.shape)
                     	#removed_bg_imgs = np.where(output.reshape((h,w,1))>0,new_img,255)
                     	#print(imgs[1])
