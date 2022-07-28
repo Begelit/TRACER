@@ -293,8 +293,8 @@ class Tester():
                     	new_img[:,:,0] = img[0]
                     	new_img[:,:,1] = img[1]
                     	new_img[:,:,2] = img[2]
-                    	print(new_img.shape)
-                    	#removed_bg_imgs = np.where(output.reshape((h,w,1))>0,imgs.reshape((h,w)).reshape((h,w,3)),255)
+                    	#print(new_img.shape)
+                    	removed_bg_imgs = np.where(output.reshape((h,w,1))>0,new_img,255)
                     	#print(imgs[1])
                     	#print(imgs[1].shape)
                     	#print(imgs.shape)
@@ -305,7 +305,7 @@ class Tester():
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
                     	cv2.imwrite("./outputs_imgs/masks/" + image_name[i]+'.png', output)
-                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', new_img)
+                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', removed_bg_imgs)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
