@@ -270,7 +270,7 @@ class Tester():
                     
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
                     print('*****',images[i].shape,'*****')
-                    img = F.interpolate(images[i], size=(h, w))
+                    img = F.interpolate(images[i], size=(3, h, w))
                     #loss = self.criterion(output, mask)
                     
                     #mae, max_f, avg_f, s_score = Eval_tool.cal_total_metrics(output, mask)
