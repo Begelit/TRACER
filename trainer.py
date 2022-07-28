@@ -289,9 +289,9 @@ class Tester():
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	#img = img.squeeze().detach().cpu().numpy()
                     	img = (img.squeeze().permute(1,2,0).cpu().numpy()*255.0).astype(np.uint8)
-                    	print(img.shape)
-                    	print(type(img))
-                    	print(img)
+                    	#print(img.shape)
+                    	#print(type(img))
+                    	#print(img)
                     	#img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	#print(type(img))
                     	#print(img.shape)
@@ -303,7 +303,7 @@ class Tester():
                     	#new_img[:,:,2] = img[1]
                     	#plt.imshow(array_to_img(new_img))
                     	#print(new_img.shape)
-                    	#removed_bg_imgs = np.where(output.reshape((h,w,1))>0,new_img,255)
+                    	removed_bg_imgs = np.where(output.reshape((h,w,1))>0,img,255)
                     	#print(imgs[1])
                     	#print(imgs[1].shape)
                     	#print(imgs.shape)
@@ -313,8 +313,8 @@ class Tester():
                     	#output = torch.moveaxis(output, 0, -1)
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
-                    	#cv2.imwrite("./outputs_imgs/masks/" + image_name[i]+'.png', output)
-                    	#cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', img)
+                    	cv2.imwrite("./outputs_imgs/masks/" + image_name[i]+'.png', output)
+                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', removed_bg_imgs)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
