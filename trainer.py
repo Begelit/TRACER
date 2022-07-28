@@ -257,8 +257,6 @@ class Tester():
             for i, (images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
             
                 images = torch.tensor(images, device=self.device, dtype=torch.float32)
-                print(type(images[1]))
-                print(images[1])
 
                 #np_images = torch.tensor(np_images, device = self.device, dtype=torch.float32)
 
@@ -271,6 +269,7 @@ class Tester():
                     h, w = H[i].item(), W[i].item()
                     
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
+                    imgs = F.interpolate(images[i].unsqueeze(0), size=(h, w), mode='bilinear')
                     #loss = self.criterion(output, mask)
                     
                     #mae, max_f, avg_f, s_score = Eval_tool.cal_total_metrics(output, mask)
@@ -288,7 +287,8 @@ class Tester():
                     	
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-
+			imgs = (imgs.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
+			print(imgs)
                     	#output.unsqueeze_(0)
                     	#output = output.repeat(3, 1, 1)
                     	#output = torch.moveaxis(output, 0, -1)
