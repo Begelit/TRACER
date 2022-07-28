@@ -269,7 +269,7 @@ class Tester():
                     h, w = H[i].item(), W[i].item()
                     
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
-                    print('*****',images.shape,'*****')
+                    print('*****',images[i].shape,'*****')
                     #img = F.interpolate(images[i].unsqueeze(0), size=(h, w), mode='bilinear')
                     #loss = self.criterion(output, mask)
                     
@@ -290,7 +290,7 @@ class Tester():
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	#img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	img = img.detach().cpu().numpy()
+                    	img = images[i].detach().cpu().numpy()
                     	print(type(img))
                     	print(img.shape)
                     	print(img)
