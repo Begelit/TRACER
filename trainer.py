@@ -269,7 +269,8 @@ class Tester():
                     h, w = H[i].item(), W[i].item()
                     
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
-                    img = F.interpolate(images[i].unsqueeze(0), size=(h, w), mode='bilinear')
+                    print('*****',images.shape,'*****')
+                    #img = F.interpolate(images[i].unsqueeze(0), size=(h, w), mode='bilinear')
                     #loss = self.criterion(output, mask)
                     
                     #mae, max_f, avg_f, s_score = Eval_tool.cal_total_metrics(output, mask)
@@ -288,7 +289,11 @@ class Tester():
                     	os.makedirs("./outputs_imgs/removed_background/",exist_ok=True)
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
+                    	#img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
+                    	img = img.detach().cpu().numpy()
+                    	print(type(img))
+                    	print(img.shape)
+                    	print(img)
                     	#new_img = np.zeros((h,w,3),dtype = np.uint8)
                     	#new_img[:,:,0] = img[2]
                     	#new_img[:,:,1] = img[1]
@@ -304,8 +309,8 @@ class Tester():
                     	#output = torch.moveaxis(output, 0, -1)
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
-                    	cv2.imwrite("./outputs_imgs/masks/" + image_name[i]+'.png', output)
-                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', img)
+                    	#cv2.imwrite("./outputs_imgs/masks/" + image_name[i]+'.png', output)
+                    	#cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', img)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
