@@ -234,6 +234,7 @@ class Tester():
         self.criterion = Criterion(args)
 
         te_img_folder = args.data_path
+        self.te_img_folder_pred = args.data_path
         te_gt_folder = None
         self.test_loader = get_loader(te_img_folder, te_gt_folder, edge_folder=None, phase='test',
                                       batch_size=args.batch_size, shuffle=False,
@@ -290,7 +291,7 @@ class Tester():
                     	os.makedirs("./outputs_imgs/removed_background/",exist_ok=True)
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	img = cv2.cvtColor(cv2.imread(os.path.join(self.args.datapath,image_name[i])),cv2.COLOR_BGR2RGB)
+                    	img = cv2.cvtColor(cv2.imread(os.path.join(self.te_img_folder_pred,image_name[i])),cv2.COLOR_BGR2RGB)
                     	removed_bg_imgs = np.where(output.reshape((h,w,1))>0,img,255)
                     	#img = img.squeeze().detach().cpu().numpy()
                     	#img = img.squeeze().permute(1,2,0).cpu().numpy()
