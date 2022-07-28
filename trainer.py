@@ -288,7 +288,7 @@ class Tester():
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	#img = img.squeeze().detach().cpu().numpy()
-                    	img = (img.squeeze().permute(1,2,0).cpu().numpy()*255.0).astype(np.uint8)
+                    	img = img.squeeze().permute(1,2,0).cpu().numpy()
                     	#print(img.shape)
                     	#print(type(img))
                     	#print(img)
@@ -314,7 +314,7 @@ class Tester():
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
                     	cv2.imwrite("./outputs_imgs/masks/" + image_name[i]+'.png', output)
-                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', removed_bg_imgs)
+                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', img)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
