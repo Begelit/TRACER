@@ -284,12 +284,12 @@ class Tester():
                     if self.args.save_map is not None:
                     
                     	os.makedirs("./outputs_imgs/",exist_ok=True)
-                    	os.makedirs("./outputs_imgs/masks",exist_ok=True)
-                    	os.makedirs("./outputs_imgs/removed_background",exist_ok=True)
+                    	os.makedirs("./outputs_imgs/masks/",exist_ok=True)
+                    	os.makedirs("./outputs_imgs/removed_background/",exist_ok=True)
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	imgs = (imgs.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	removed_bg_imgs = np.where(output.reshape((1,h,w))>0,imgs,255)
+                    	removed_bg_imgs = np.where(output.reshape((h,w,1))>0,imgs.reshape((h,w)).reshape((h,w,3)),255)
                     	#print(imgs.shape)
                     	#print(output.shape)
                     	#output.unsqueeze_(0)
@@ -297,8 +297,8 @@ class Tester():
                     	#output = torch.moveaxis(output, 0, -1)
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
-                    	cv2.imwrite("./outputs_imgs/masks" + image_name[i]+'.png', output)
-                    	cv2.imwrite("./outputs_imgs/removed_background" + image_name[i]+'.png', removed_bg_imgs)
+                    	cv2.imwrite("./outputs_imgs/masks/" + image_name[i]+'.png', output)
+                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', removed_bg_imgs)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
