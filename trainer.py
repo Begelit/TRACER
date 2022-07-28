@@ -283,9 +283,9 @@ class Tester():
                     # Save prediction map
                     if self.args.save_map is not None:
                     
-                    	os.makedirs("./results/",exist_ok=True)
-                    	os.makedirs("./results/masks",exist_ok=True)
-                    	os.makedirs("./results/removed_background",exist_ok=True)
+                    	os.makedirs("./outputs_imgs/",exist_ok=True)
+                    	os.makedirs("./outputs_imgs/masks",exist_ok=True)
+                    	os.makedirs("./outputs_imgs/removed_background",exist_ok=True)
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	imgs = (imgs.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
@@ -297,8 +297,8 @@ class Tester():
                     	#output = torch.moveaxis(output, 0, -1)
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
-                    	cv2.imwrite("./results/masks" + image_name[i]+'.png', output)
-                    	cv2.imwrite("./results/removed_background" + image_name[i]+'.png', removed_bg_imgs)
+                    	cv2.imwrite("./outputs_imgs/masks" + image_name[i]+'.png', output)
+                    	cv2.imwrite("./outputs_imgs/removed_background" + image_name[i]+'.png', removed_bg_imgs)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
