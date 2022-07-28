@@ -289,7 +289,7 @@ class Tester():
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	imgs = (imgs.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	removed_bg_imgs = np.where(output.reshape((h,w,1))>0,imgs,255)
+                    	removed_bg_imgs = np.where(output.reshape((1,h,w))>0,imgs,255)
                     	#print(imgs.shape)
                     	#print(output.shape)
                     	#output.unsqueeze_(0)
