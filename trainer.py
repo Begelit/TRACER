@@ -292,7 +292,7 @@ class Tester():
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	#print(os.path.join(self.te_img_folder_pred,image_name[i]+'.jpg'))
-                    	img = cv2.cvtColor(cv2.imread(os.path.join(self.te_img_folder_pred,image_name[i]+'.jpg')),cv2.COLOR_BGR2RGB)
+                    	img = cv2.cvtColor(cv2.imread(os.path.join(self.te_img_folder_pred,image_name[i]+'.jpg')),cv2.COLOR_RGB2BGR)
                     	removed_bg_imgs = np.where(output.reshape((h,w,1))>0,img,255)
                     	#img = img.squeeze().detach().cpu().numpy()
                     	#img = img.squeeze().permute(1,2,0).cpu().numpy()
