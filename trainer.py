@@ -289,12 +289,12 @@ class Tester():
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	new_img = np.zeros((h,w,3),dtype = np.uint8)
-                    	new_img[:,:,0] = img[2]
-                    	new_img[:,:,1] = img[1]
-                    	new_img[:,:,2] = img[0]
+                    	#new_img = np.zeros((h,w,3),dtype = np.uint8)
+                    	#new_img[:,:,0] = img[2]
+                    	#new_img[:,:,1] = img[1]
+                    	#new_img[:,:,2] = img[0]
                     	#print(new_img.shape)
-                    	removed_bg_imgs = np.where(output.reshape((h,w,1))>0,new_img,255)
+                    	#removed_bg_imgs = np.where(output.reshape((h,w,1))>0,new_img,255)
                     	#print(imgs[1])
                     	#print(imgs[1].shape)
                     	#print(imgs.shape)
@@ -305,7 +305,7 @@ class Tester():
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
                     	cv2.imwrite("./outputs_imgs/masks/" + image_name[i]+'.png', output)
-                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', removed_bg_imgs)
+                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', img)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
