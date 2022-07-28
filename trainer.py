@@ -288,7 +288,7 @@ class Tester():
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	#img = img.squeeze().detach().cpu().numpy()
-                    	img = img.squeeze().permute(1,2,0).cpu().numpy()
+                    	img = (img.squeeze().permute(1,2,0).cpu().numpy()*255.0).astype(np.uint8)
                     	print(img.shape)
                     	print(type(img))
                     	print(img)
