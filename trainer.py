@@ -257,10 +257,8 @@ class Tester():
             #for i, (np_images, images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
             #for i, (images, masks, original_size, image_name) in enumerate(tqdm(self.test_loader)):
             for i, (images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
-                tens_images = torch.tensor(images, device=self.device, dtype=torch.float32)
-                print(type(images[i]))
-                print(images[i].shape)
-                outputs, edge_mask, ds_map = self.model(tens_images)
+                images = torch.tensor(images, device=self.device, dtype=torch.float32)
+                outputs, edge_mask, ds_map = self.model(images)
                 H, W = original_size
 
                 for i in range(images.size(0)):
@@ -270,7 +268,7 @@ class Tester():
                     
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
                     #print('*****',images[i].shape,'*****')
-                    #img = F.interpolate(images[i].unsqueeze(0), size=(h, w))
+                    img = F.interpolate(images[i].unsqueeze(0), size=(h, w),, mode='bilinear')
                     #loss = self.criterion(output, mask)
                     
                     #mae, max_f, avg_f, s_score = Eval_tool.cal_total_metrics(output, mask)
@@ -289,7 +287,9 @@ class Tester():
                     	os.makedirs("./outputs_imgs/removed_background/",exist_ok=True)
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	#img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
+                    	img = img.squeeze().detach().cpu().numpy()
+                    	print(img.shape)
+                    	print(img)
                     	#img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	#print(type(img))
                     	#print(img.shape)
