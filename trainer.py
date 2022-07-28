@@ -297,11 +297,11 @@ class Tester():
                     	print(img.shape)
                     	print(img)
                     	#%matplotlib inline
-                    	plt.imshow(array_to_img(img[0]))
-                    	#new_img = np.zeros((h,w,3),dtype = np.uint8)
-                    	#new_img[:,:,0] = img[2]
-                    	#new_img[:,:,1] = img[1]
-                    	#new_img[:,:,2] = img[0]
+                    	new_img = np.zeros((h,w,3),dtype = np.uint8)
+                    	new_img[:,:,0] = img[0]
+                    	new_img[:,:,1] = img[2]
+                    	new_img[:,:,2] = img[1]
+                    	plt.imshow(array_to_img(new_img))
                     	#print(new_img.shape)
                     	#removed_bg_imgs = np.where(output.reshape((h,w,1))>0,new_img,255)
                     	#print(imgs[1])
