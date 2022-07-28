@@ -14,8 +14,7 @@ from util.utils import AvgMeter
 from util.metrics import Evaluation_metrics
 from util.losses import Optimizer, Scheduler, Criterion
 from model.TRACER import TRACER
-from tensorflow.keras.preprocessing.image import array_to_img
-import matplotlib.pyplot as plt
+from PIL import Image
 
 
 class Trainer():
@@ -292,7 +291,7 @@ class Tester():
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	#print(os.path.join(self.te_img_folder_pred,image_name[i]+'.jpg'))
-                    	img = cv2.cvtColor(cv2.imread(os.path.join(self.te_img_folder_pred,image_name[i]+'.jpg')),cv2.COLOR_RGB2BGR)
+                    	img = cv2.cvtColor(cv2.imread(os.path.join(self.te_img_folder_pred,image_name[i]+'.jpg')),cv2.COLOR_BGR2RGB)
                     	removed_bg_imgs = np.where(output.reshape((h,w,1))>0,img,255)
                     	#img = img.squeeze().detach().cpu().numpy()
                     	#img = img.squeeze().permute(1,2,0).cpu().numpy()
@@ -320,7 +319,8 @@ class Tester():
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
                     	cv2.imwrite("./outputs_imgs/masks/" + image_name[i]+'.png', output)
-                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.jpg', removed_bg_imgs)
+                    	#cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.jpg', removed_bg_imgs)
+                    	Image.fromarray(removed_bg_imgs).save("./outputs_imgs/removed_background/" + image_name[i]+'.png')
 
                     # log
                     #test_loss.update(loss.item(), n=1)
