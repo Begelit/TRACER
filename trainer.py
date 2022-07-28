@@ -283,18 +283,21 @@ class Tester():
                     # Save prediction map
                     if self.args.save_map is not None:
                     
-                    	os.makedirs("./seg_img/",exist_ok=True)
-                    	
+                    	os.makedirs("./results/",exist_ok=True)
+                    	os.makedirs("./results/masks",exist_ok=True)
+                    	os.makedirs("./results/removed_background",exist_ok=True)
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	imgs = (imgs.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	print(imgs)
+                    	#removed_bg_imgs = np.where()
+                    	print(imgs.shape)
+                    	print(output.shape)
                     	#output.unsqueeze_(0)
                     	#output = output.repeat(3, 1, 1)
                     	#output = torch.moveaxis(output, 0, -1)
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
-                    	cv2.imwrite("./seg_img/" + image_name[i]+'.png', output)
+                    	cv2.imwrite("./results/masks" + image_name[i]+'.png', output)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
