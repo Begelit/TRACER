@@ -269,7 +269,7 @@ class Tester():
                     h, w = H[i].item(), W[i].item()
                     
                     output = F.interpolate(outputs[i].unsqueeze(0), size=(h, w), mode='bilinear')
-                    imgs = F.interpolate(images[i].unsqueeze(0), size=(h, w), mode='bilinear')
+                    img = F.interpolate(images[i].unsqueeze(0), size=(h, w), mode='bilinear')
                     #loss = self.criterion(output, mask)
                     
                     #mae, max_f, avg_f, s_score = Eval_tool.cal_total_metrics(output, mask)
@@ -288,10 +288,15 @@ class Tester():
                     	os.makedirs("./outputs_imgs/removed_background/",exist_ok=True)
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	imgs = (imgs.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
+                    	img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
+                    	new_img = np.zeros((h,w,3),dtype = np.uint8)
+                    	new_img[:,:,0] = img[0]
+                    	new_img[:,:,1] = img[1]
+                    	new_img[:,:,2] = img[2]
+                    	print(new_img.shape)
                     	#removed_bg_imgs = np.where(output.reshape((h,w,1))>0,imgs.reshape((h,w)).reshape((h,w,3)),255)
-                    	print(imgs[1])
-                    	print(imgs[1].shape)
+                    	#print(imgs[1])
+                    	#print(imgs[1].shape)
                     	#print(imgs.shape)
                     	#print(output.shape)
                     	#output.unsqueeze_(0)
@@ -300,7 +305,7 @@ class Tester():
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
                     	cv2.imwrite("./outputs_imgs/masks/" + image_name[i]+'.png', output)
-                    	#cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', removed_bg_imgs)
+                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', new_img)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
