@@ -259,7 +259,7 @@ class Tester():
             for i, (images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
                 tens_images = torch.tensor(images, device=self.device, dtype=torch.float32)
                 print(type(images[i]))
-
+                print(images[i].shape)
                 outputs, edge_mask, ds_map = self.model(tens_images)
                 H, W = original_size
 
