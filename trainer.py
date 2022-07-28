@@ -292,12 +292,12 @@ class Tester():
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	#img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	img = (img.detach().cpu().numpy()*255.0).astype(np.uint8)
+                    	img = (img.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	print(type(img))
                     	print(img.shape)
                     	print(img)
                     	#%matplotlib inline
-                    	plt.imshow(array_to_img(img[0]))
+                    	#plt.imshow(array_to_img(img[0]))
                     	#new_img = np.zeros((h,w,3),dtype = np.uint8)
                     	#new_img[:,:,0] = img[2]
                     	#new_img[:,:,1] = img[1]
