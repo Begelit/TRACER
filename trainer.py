@@ -257,6 +257,8 @@ class Tester():
             for i, (images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
             
                 images = torch.tensor(images, device=self.device, dtype=torch.float32)
+                print(type(images[1]))
+                print(images[1])
 
                 #np_images = torch.tensor(np_images, device = self.device, dtype=torch.float32)
 
