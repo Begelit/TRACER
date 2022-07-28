@@ -287,8 +287,8 @@ class Tester():
                     	
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-			imgs = (imgs.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-			print(imgs)
+                    	imgs = (imgs.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
+                    	print(imgs)
                     	#output.unsqueeze_(0)
                     	#output = output.repeat(3, 1, 1)
                     	#output = torch.moveaxis(output, 0, -1)
