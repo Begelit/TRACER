@@ -320,7 +320,7 @@ class Tester():
                     	#output = (output.detach().cpu().numpy()).astype(np.uint8)
                     	
                     	cv2.imwrite("./outputs_imgs/masks/" + image_name[i]+'.png', output)
-                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.png', removed_bg_imgs)
+                    	cv2.imwrite("./outputs_imgs/removed_background/" + image_name[i]+'.jpg', removed_bg_imgs)
 
                     # log
                     #test_loss.update(loss.item(), n=1)
