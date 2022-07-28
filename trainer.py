@@ -257,7 +257,7 @@ class Tester():
             #for i, (np_images, images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
             #for i, (images, masks, original_size, image_name) in enumerate(tqdm(self.test_loader)):
             for i, (images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
-            	 print(type(images))
+                print(type(images))
                 images = torch.tensor(images, device=self.device, dtype=torch.float32)
                 outputs, edge_mask, ds_map = self.model(images)
                 H, W = original_size
