@@ -258,9 +258,9 @@ class Tester():
             #for i, (np_images, images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
             #for i, (images, masks, original_size, image_name) in enumerate(tqdm(self.test_loader)):
             for i, (images, original_size, image_name) in enumerate(tqdm(self.test_loader)):
-                print(type(images))
-                print(type(images[i]))
-                print(images[i])
+                #print(type(images))
+                #print(type(images[i]))
+                #print(images[i])
                 images = torch.tensor(images, device=self.device, dtype=torch.float32)
                 outputs, edge_mask, ds_map = self.model(images)
                 H, W = original_size
@@ -291,7 +291,7 @@ class Tester():
                     	os.makedirs("./outputs_imgs/removed_background/",exist_ok=True)
                     	#output = output.squeeze()*255.0  # convert uint8 type
                     	output = (output.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
-                    	print(os.path.join(self.te_img_folder_pred,image_name[i]+'.jpg'))
+                    	#print(os.path.join(self.te_img_folder_pred,image_name[i]+'.jpg'))
                     	img = cv2.cvtColor(cv2.imread(os.path.join(self.te_img_folder_pred,image_name[i]+'.jpg')),cv2.COLOR_BGR2RGB)
                     	removed_bg_imgs = np.where(output.reshape((h,w,1))>0,img,255)
                     	#img = img.squeeze().detach().cpu().numpy()
