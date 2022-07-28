@@ -291,6 +291,7 @@ class Tester():
                     	imgs = (imgs.squeeze().detach().cpu().numpy()*255.0).astype(np.uint8)
                     	#removed_bg_imgs = np.where(output.reshape((h,w,1))>0,imgs.reshape((h,w)).reshape((h,w,3)),255)
                     	print(imgs[1])
+                    	print(imgs[1].shape)
                     	#print(imgs.shape)
                     	#print(output.shape)
                     	#output.unsqueeze_(0)
