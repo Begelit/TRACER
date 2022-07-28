@@ -14,6 +14,8 @@ from util.utils import AvgMeter
 from util.metrics import Evaluation_metrics
 from util.losses import Optimizer, Scheduler, Criterion
 from model.TRACER import TRACER
+from tensorflow.keras.preprocessing.image import array_to_img
+import matplotlib.pyplot as plt
 
 
 class Trainer():
@@ -294,6 +296,8 @@ class Tester():
                     	print(type(img))
                     	print(img.shape)
                     	print(img)
+                    	%matplotlib inline
+                    	plt.imshow(array_to_img(img[0]))
                     	#new_img = np.zeros((h,w,3),dtype = np.uint8)
                     	#new_img[:,:,0] = img[2]
                     	#new_img[:,:,1] = img[1]
