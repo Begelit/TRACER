@@ -83,6 +83,7 @@ def get_loader(img_folder, gt_folder, edge_folder, phase: str, batch_size, shuff
         dataset = Test_DatasetGenerate(img_folder, gt_folder, transform)
         data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
     else:
+        print(img_folder, gt_folder, edge_folder)
         dataset = DatasetGenerate(img_folder, gt_folder, edge_folder, phase, transform, seed)
         data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers,
                                  drop_last=False)
