@@ -26,6 +26,7 @@ class Trainer():
         self.tr_img_folder = os.path.join(args.data_path, args.dataset, 'Train/images/')
         self.tr_gt_folder = os.path.join(args.data_path, args.dataset, 'Train/masks/')
         self.tr_edge_folder = os.path.join(args.data_path, args.dataset, 'Train/edges/')
+        print(self.tr_img_folder,self.tr_gt_folder,self.tr_edge_folder)
 
         self.train_transform = get_train_augmentation(img_size=args.img_size, ver=args.aug_ver)
         self.test_transform = get_test_augmentation(img_size=args.img_size)
