@@ -102,8 +102,8 @@ class Trainer():
             images = torch.tensor(images, device=self.device, dtype=torch.float32)
             masks = torch.tensor(masks, device=self.device, dtype=torch.float32)
             edges = torch.tensor(edges, device=self.device, dtype=torch.float32)
-            print(images)
-            print(images.shape)
+            #print(images)
+            #print(images.shape)
 
             self.optimizer.zero_grad()
             outputs, edge_mask, ds_map = self.model(images)
