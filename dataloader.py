@@ -12,8 +12,11 @@ from sklearn.model_selection import train_test_split
 class DatasetGenerate(Dataset):
     def __init__(self, img_folder, gt_folder, edge_folder, phase: str = 'train', transform=None, seed=None):
         self.images = sorted(glob.glob(img_folder + '/*'))
+        print(self.images)
         self.gts = sorted(glob.glob(gt_folder + '/*'))
+        print(self.gts)
         self.edges = sorted(glob.glob(edge_folder + '/*'))
+        print(self.edges)
         self.transform = transform
 
         train_images, val_images, train_gts, val_gts, train_edges, val_edges = train_test_split(self.images, self.gts,
