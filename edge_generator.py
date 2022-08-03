@@ -9,7 +9,7 @@ import numpy as np
 from tqdm import tqdm
 
 # Append custom datasets below list
-dataset_list = ['DUTS', 'DUT-O', 'HKU-IS', 'ECSSD', 'PASCAL-S']
+dataset_list = ['DUTS', 'DUT-O', 'HKU-IS', 'ECSSD', 'PASCAL-S', 'COCO']
 
 
 def edge_generator(dataset):
@@ -36,3 +36,6 @@ def edge_generator(dataset):
 if __name__ == '__main__':
     for dataset in dataset_list:
         edge_generator(dataset)
+
+
+
