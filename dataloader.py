@@ -12,11 +12,11 @@ from sklearn.model_selection import train_test_split
 class DatasetGenerate(Dataset):
     def __init__(self, img_folder, gt_folder, edge_folder, phase: str = 'train', transform=None, seed=None):
         self.images = sorted(glob.glob(img_folder + '/*'))
-        print(self.images)
+        #print(self.images)
         self.gts = sorted(glob.glob(gt_folder + '/*'))
-        print(self.gts)
+        #print(self.gts)
         self.edges = sorted(glob.glob(edge_folder + '/*'))
-        print(self.edges)
+        #print(self.edges)
         self.transform = transform
 
         train_images, val_images, train_gts, val_gts, train_edges, val_edges = train_test_split(self.images, self.gts,
@@ -86,7 +86,7 @@ def get_loader(img_folder, gt_folder, edge_folder, phase: str, batch_size, shuff
         dataset = Test_DatasetGenerate(img_folder, gt_folder, transform)
         data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
     else:
-        print(img_folder, gt_folder, edge_folder)
+        #print(img_folder, gt_folder, edge_folder)
         dataset = DatasetGenerate(img_folder, gt_folder, edge_folder, phase, transform, seed)
         data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers,
                                  drop_last=False)
